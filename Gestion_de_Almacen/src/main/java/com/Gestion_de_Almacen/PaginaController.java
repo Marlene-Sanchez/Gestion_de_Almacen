@@ -21,17 +21,21 @@ public class PaginaController {
         this.ventaRepo = ventaRepo;
         this.tenisRepo = tenisRepo;
     }
-    @GetMapping("/Producto")
-    public String agregarProducto() {
+    @GetMapping("/producto")
+    public String producto() {
         return "producto";
     }
-    @GetMapping("/Search")
-    public String mostrarSearch() {
-        return "Search";
+    @GetMapping("/search")
+    public String search() {
+        return "search";
     }
     @GetMapping("/Login")
     public String mostrarLogin() {
         return "Login";
+    }
+    @GetMapping("/venta")
+    public String venta() {
+        return "venta";
     }
     @GetMapping("/Dashboard")
     public String mostrarInicio(Model model) {

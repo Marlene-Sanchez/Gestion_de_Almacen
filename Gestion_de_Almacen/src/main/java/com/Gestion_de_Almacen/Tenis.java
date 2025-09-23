@@ -5,24 +5,16 @@ import jakarta.persistence.*;
 public class Tenis {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private int id;
+    private Long id;
 
-        String marca;
-        String modelo;
-        int talla;
-        String color;
-        double precio;
-        int stock;
+    String marca;
+    String modelo;
+    int talla;
+    String color;
+    double precio;
+    int stock;
 
-
-    public void actualizarStock(int talla) {
-        this.talla = talla;
-    }
-
-    public String mostrarInfo(){
-        return (this.marca+" "+modelo+" Talla: "+talla+"\n");
-    }
-
+    public Tenis() {}
     public Tenis(String marca, String modelo, int talla, String color, double precio, int stock) {
         this.marca = marca;
         this.modelo = modelo;
@@ -31,8 +23,16 @@ public class Tenis {
         this.precio = precio;
         this.stock = stock;
     }
+    public void actualizarStock(int talla) {
+        this.talla = talla;
+    }
 
-    public int getId() {
+    public String mostrarInfo(){
+        return (this.marca+" "+modelo+" Talla: "+talla+"\n");
+    }
+
+
+    public Long getId() {
         return id;
     }
 
