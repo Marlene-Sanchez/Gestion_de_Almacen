@@ -1,7 +1,6 @@
 package com.Gestion_de_Almacen;
-import jakarta.persistence.*;
 
-@Entity
+
 public class Tenis {
         int id;
         String marca;
