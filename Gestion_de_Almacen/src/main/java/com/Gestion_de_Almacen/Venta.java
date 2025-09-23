@@ -3,7 +3,9 @@ package com.Gestion_de_Almacen;
 import jakarta.persistence.*;
 import java.sql.Date;
 
+
 @Entity
+@Table(name = "Ventas")
 public class Venta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.ui.Model;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import java.util.List;
 
@@ -33,7 +35,10 @@ public class PaginaController {
     }
     @GetMapping("/Dashboard")
     public String mostrarInicio(Model model) {
-
+        LocalDate hoy = LocalDate.now();
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd 'de' MMMM 'de' yyyy");
+        String fechaFormateada = hoy.format(formato);
+        model.addAttribute("fechaHoy", fechaFormateada);
         List<Venta> ventas = ventaRepo.findAll();
 
         int paresVendidosHoy = ventas.size();

@@ -70,7 +70,7 @@
     </h2>
     <p class="fw700 fs-5">
         Bienvenido, José! hoy es
-        <span class="text-pink">04 de Septiembre de 2025</span>
+        <span class="text-pink" th:text="${fechaHoy}">04 de Septiembre de 2025</span>
     </p>
 
     <div class="row g-4 mt-3">
@@ -81,18 +81,20 @@
                     <div class="col">Pares en bodega</div>
                     <div class="col text-end">500</div>
                 </div>
+
                 <div class="row mb-2">
                     <div class="col">Pares vendidos hoy</div>
-                    <div class="col text-end">20</div>
-                    <div class="col text-end" th:text="${reporte.paresVendidosHoy}"></div>
+                    <div class="col">Pares vendidos hoy</div>
+                    <div class="col text-end" th:text="${paresVendidosHoy}">0</div>
                 </div>
+
                 <div class="row mb-2">
                     <div class="col">Modelo más vendido hoy</div>
                     <div class="col text-end">Nike Air blanco</div>
                 </div>
                 <div class="row">
                     <div class="col">Ingresos de hoy</div>
-                    <div class="col text-end">$1000</div>
+                    <div class="col text-end" th:text="${ingresosHoy}">0</div>
                 </div>
             </div>
 
@@ -101,18 +103,15 @@
         <div class="col-md-6 position-relative">
             <h5 class="fw700 text-orange mb-2">Bitácora de ventas</h5>
             <div class="box p-4">
-                <p class="text-pink mb-1">Fecha</p>
-                <p class="mb-1">Modelo</p>
-                <p class="mb-1">Número</p>
-                <p class="mb-3">Precio</p>
-
-                <hr class="my-3">
-
-                <p class="text-pink mb-1">Fecha</p>
-                <p class="mb-1">Modelo</p>
-                <p class="mb-1">Número</p>
-                <p class="mb-0">Precio</p>
+                <div th:each="venta : ${ventas}">
+                    <p class="text-pink mb-1" th:text="${venta.fecha}">Fecha</p>
+                    <p class="mb-1" th:text="${venta.tenis.modelo}">Modelo</p>
+                    <p class="mb-1" th:text="${venta.tenis.talla}">Número</p>
+                    <p class="mb-3" th:text="${venta.tenis.precio}">Precio</p>
+                    <hr class="my-3">
+                </div>
             </div>
+
 
             <button class="fab">+</button>
         </div>

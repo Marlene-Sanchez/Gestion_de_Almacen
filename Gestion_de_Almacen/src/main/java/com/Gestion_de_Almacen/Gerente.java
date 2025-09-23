@@ -1,6 +1,11 @@
 package com.Gestion_de_Almacen;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "gerentes")
 public class Gerente {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String usuario;
     private String contraseña;
 
