@@ -1,11 +1,15 @@
 package com.Gestion_de_Almacen;
 
 public class Gerente {
-    private int usuario;
+    private String usuario;
     private String contraseña;
 
-    private void iniciarSesion( int user, int contraseña){
-
+    public Gerente(String usuario, String contraseña) {
+        this.usuario = usuario;
+        this.contraseña = contraseña;
+    }
+    public boolean iniciarSesion(String usuario, String contraseña) {
+        return this.usuario.equals(usuario) && this.contraseña.equals(contraseña);
     }
     public void registrarVenta(Venta x){
 
@@ -14,4 +18,11 @@ public class Gerente {
 
     }
 
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
 }

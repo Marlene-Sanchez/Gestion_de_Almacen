@@ -9,6 +9,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class PaginaController {
+    private Gerente gerente = new Gerente("admin", "1234");
 
     @GetMapping("/Producto")
     public String agregarProducto() {
@@ -31,7 +32,7 @@ public class PaginaController {
                                 @RequestParam String password,
                                 RedirectAttributes redirectAttributes) {
 
-        if (usuario.equals("admin") && password.equals("1234")) {
+        if (gerente.iniciarSesion(usuario, password)) {
             redirectAttributes.addFlashAttribute("nombreUsuario", usuario);
             return "redirect:/Dashboard";
         } else {
@@ -39,5 +40,6 @@ public class PaginaController {
             return "redirect:/Login";
         }
     }
+
 
 }
