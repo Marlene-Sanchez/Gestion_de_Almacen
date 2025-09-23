@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crear <span>Producto</span></title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #fdfdfd;
+      font-family: 'Inter', sans-serif;
+      
+    }
+    .title {
+    font-weight: 700;
+    font-size: 22px;
+  }
+
+  .title span {
+    color: #FA8C8C;
+  }
+    .text-center {
+      text-align: center;
+      font-weight: 700;
+    font-size: 22px;
+    }
+    .search-box {
+      background: #FCF3E7;
+      border-radius: 20px;
+      padding: 2rem;
+      font-weight: bold;
+      box-shadow: 0px 4px 8px rgba(188, 0, 0, 0.1);
+      
+    }
+    .btn-dark {
+      background-color: #f7a942;
+      border: none;
+    }
+    .btn-custom {
+      border-radius: 20px;
+      padding: 10px 20px;
+      font-weight: bold;
+    }
+    
+    
+    .btn-buscar {
+      background-color: #f7a942;
+      color: white;
+    }
+    .results {
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px dashed #ccc;
+      border-radius: 15px;
+      min-height: 100px;
+      text-align: center;
+      color: #999;
+      font-style: italic;
+    }
+  
+  </style>
+</head>
+<body class="d-flex align-items-center justify-content-center vh-100">
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8 search-box">
+        <h4 class="text-center mb-4 title">Agregar <span>Tenis</span></h4>
+        
+        <form class="row g-2 align-items-center">
+            <div class="col-md-5">
+            <label for="marca" class="form-label">Marca:</label>
+            <input type="text" class="form-control" id="marca" placeholder="Marca del tenis">
+          </div>
+        
+          <div class="col-md-5">
+            <label for="modelo" class="form-label">Modelo:</label>
+            <input type="text" class="form-control" id="modelo" placeholder="Modelo del tenis">
+          </div>
+          <div class="col-md-5">
+            <label for="talla" class="form-label">Talla:</label>
+            <input type="number" class="form-control" id="talla" min="22" step="1 placeholder="Talla del tenis">
+          </div>
+          <div class="col-md-5">
+            <label for="color" class="form-label">Color:</label>
+            <input type="text" class="form-control" id="color" placeholder="Color del tenis">
+          </div>
+          <div class="col-md-2 d-flex align-items-end">
+            <button type="submit" class="btn btn-dark w-100">
+              Agregar
+            </button>
+          </div>
+          <div class="col-md-5">
+            <label for="precio" class="form-label">Precio:</label>
+            <input type="float" class="form-control" id="precio" placeholder="Precio del tenis">
+          </div>
+          <div class="col-md-5">
+            <label for="stock" class="form-label">Stock:</label>
+            <input type="number" class="form-control" min="6" id="stock" placeholder="Stock del tenis">
+          </div>
+          
+        </form>
+        
+        
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
