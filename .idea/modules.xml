@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Gestion_de_Almacen.iml" filepath="$PROJECT_DIR$/.idea/Gestion_de_Almacen.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Gestion_de_Almacen/Gestion_de_Almacen.iml" filepath="$PROJECT_DIR$/Gestion_de_Almacen/Gestion_de_Almacen.iml" />
     </modules>
   </component>
 </project>
