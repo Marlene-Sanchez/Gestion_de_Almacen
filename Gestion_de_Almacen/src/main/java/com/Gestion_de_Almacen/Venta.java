@@ -1,11 +1,17 @@
 package com.Gestion_de_Almacen;
 
+import jakarta.persistence.*;
 import java.sql.Date;
 
+@Entity
 public class Venta {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idVenta;
+
     private Date fecha;
+
+    @ManyToOne
     private Tenis tenis;
 
 

@@ -1,15 +1,18 @@
 package com.Gestion_de_Almacen;
-
-
+import jakarta.persistence.*;
+@Entity
 public class Tenis {
-        int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private int id;
+
         String marca;
         String modelo;
         int talla;
         String color;
         double precio;
         int stock;
-        //ubicacion
+
 
     public void actualizarStock(int talla) {
         this.talla = talla;
