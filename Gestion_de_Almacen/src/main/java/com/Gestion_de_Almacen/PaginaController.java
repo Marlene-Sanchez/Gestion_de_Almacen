@@ -1,5 +1,6 @@
 package com.Gestion_de_Almacen;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,11 +23,17 @@ public class PaginaController {
         this.tenisRepo = tenisRepo;
     }
     @GetMapping("/producto")
-    public String producto() {
+    public String producto(HttpSession session) {
+        if (session.getAttribute("usuario") == null) {
+            return "redirect:/Login";
+        }
         return "producto";
     }
     @GetMapping("/search")
-    public String search() {
+    public String search(HttpSession session) {
+        if (session.getAttribute("usuario") == null) {
+            return "redirect:/Login";
+        }
         return "search";
     }
     @GetMapping("/Login")
@@ -34,11 +41,17 @@ public class PaginaController {
         return "Login";
     }
     @GetMapping("/venta")
-    public String venta() {
+    public String venta(HttpSession session) {
+        if (session.getAttribute("usuario") == null) {
+            return "redirect:/Login";
+        }
         return "venta";
     }
     @GetMapping("/Dashboard")
-    public String mostrarInicio(Model model) {
+    public String mostrarInicio(Model model, HttpSession session) {
+        if (session.getAttribute("usuario") == null) {
+            return "redirect:/Login";
+        }
         LocalDate hoy = LocalDate.now();
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd 'de' MMMM 'de' yyyy");
         String fechaFormateada = hoy.format(formato);
@@ -51,25 +64,30 @@ public class PaginaController {
                 .sum();
 
         model.addAttribute("paresVendidosHoy", paresVendidosHoy);
-        model.addAttribute("ingresosHoy", ingresosHoy);
+        model.addAttribute("ingresosHoy", ventas.stream()
+                                                            .mapToDouble(v -> v.getTenis().getPrecio())
+                                                            .sum());
         model.addAttribute("ventas", ventas);
 
-        return "dashboard"; // tu HTML dashboard.html
+        return "dashboard";
     }
 
     @PostMapping("/procesarLogin")
     public String procesarLogin(@RequestParam String usuario,
                                 @RequestParam String password,
+                                HttpSession session,
                                 RedirectAttributes redirectAttributes) {
 
         if (gerente.iniciarSesion(usuario, password)) {
-            redirectAttributes.addFlashAttribute("nombreUsuario", usuario);
+            session.setAttribute("usuario", usuario);
             return "redirect:/Dashboard";
         } else {
             redirectAttributes.addFlashAttribute("error", "Usuario o contraseña incorrectos");
             return "redirect:/Login";
         }
     }
+
+
 
 
 }
