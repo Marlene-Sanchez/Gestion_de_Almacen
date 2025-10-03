@@ -1,7 +1,6 @@
 package com.Gestion_de_Almacen;
 
 import jakarta.servlet.http.HttpSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -21,37 +20,8 @@ public class PaginaController {
         this.ventaRepo = ventaRepo;
         this.tenisRepo = tenisRepo;
     }
-    @GetMapping("/producto")
-    public String producto(HttpSession session) {
-        if (session.getAttribute("usuario") == null) {
-            return "redirect:/Login";
-        }
-        return "producto";
-    }
 
-    @RequestMapping("/tenis")
-    public class TenisController {
 
-        @Autowired
-        private TenisRepository tenisRepository;
-
-        @GetMapping("/search")
-        public String buscarTenis(Model model,HttpSession session) {
-            if (session.getAttribute("usuario") == null) {
-                return "redirect:/Login";
-            }
-            model.addAttribute("tenisList", tenisRepository.findAll());
-            return "search";
-        }
-
-        @GetMapping("/detalle/{id}")
-        public String detalleTenis(@PathVariable Long id, Model model) {
-            Tenis tenis = tenisRepository.findById(Math.toIntExact(id))
-                    .orElseThrow(() -> new RuntimeException("No se encontró el tenis"));
-            model.addAttribute("tenis", tenis);
-            return "Tenis";
-        }
-    }
     @GetMapping("/Login")
     public String mostrarLogin() {
         return "Login";
@@ -65,7 +35,7 @@ public class PaginaController {
         return "venta";
     }
     @GetMapping("/Dashboard")
-    public String mostrarInicio(Model model, HttpSession session) {
+    public String mostrarDashboard(Model model, HttpSession session) {
         if (session.getAttribute("usuario") == null) {
             return "redirect:/Login";
         }

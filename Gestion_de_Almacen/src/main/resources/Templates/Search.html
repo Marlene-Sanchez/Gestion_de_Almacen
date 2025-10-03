@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -79,44 +79,38 @@
     <div class="row justify-content-center">
       <div class="col-md-8 search-box">
         <h4 class="title">Buscar tenis en inventario</h4>
-        
-        <form class="row g-2 align-items-center">
+      <form class="row g-2 align-items-center" method="get" action="/tenis/search">
           <div class="col-md-5">
-            <label for="marca" class="form-label">Marca:</label>
-            <input type="text" class="form-control" id="marca" placeholder="Marca del tenis">
+              <label for="marca" class="form-label">Marca:</label>
+              <input type="text" class="form-control" id="marca" name="marca" placeholder="Marca del tenis">
           </div>
           <div class="col-md-5">
-            <label for="modelo" class="form-label">Modelo:</label>
-            <input type="text" class="form-control" id="modelo" placeholder="Modelo del tenis">
+              <label for="modelo" class="form-label">Modelo:</label>
+              <input type="text" class="form-control" id="modelo" name="modelo" placeholder="Modelo del tenis">
           </div>
           <div class="col-md-2 d-flex align-items-end">
-            <button type="submit" class="btn btn-dark w-100">
-              Buscar
-            </button>
+              <button type="submit" class="btn btn-dark w-100">
+                  Buscar
+              </button>
           </div>
-        </form>
-
-        <div class="results mt-4">
-
-          <div class="card mb-2">
-            <div class="card-body">
-              <h5 class="card-title">Nike Air Max</h5>
-              <p class="card-text">Talla: 26 - Color: Negro - $1800</p>
-              <a href="/tenis/detalle/1" class="btn btn-dark btn-sm">Ver detalles</a>
-            </div>
+      </form>
+          <div class="results mt-4">
+              <div th:if="${tenisList != null}" th:each="tenis : ${tenisList}" class="card mb-2">
+                  <div class="card-body">
+                      <h5 class="card-title" th:text="${tenis.marca + ' ' + tenis.modelo}">Marca Modelo</h5>
+                      <p class="card-text">
+                          Talla: <span th:text="${tenis.talla}">0</span> -
+                          Color: <span th:text="${tenis.color}">---</span> -
+                          $<span th:text="${tenis.precio}">0.00</span>
+                      </p>
+                      <a th:href="@{/tenis/detalle/{id}(id=${tenis.id})}" class="btn btn-dark btn-sm">Ver detalles</a>
+                  </div>
+              </div>
           </div>
 
-          <div class="card mb-2">
-            <div class="card-body">
-              <h5 class="card-title">Adidas Superstar</h5>
-              <p class="card-text">Talla: 25 - Color: Blanco - $1500</p>
-              <a href="/tenis/detalle/2" class="btn btn-dark btn-sm">Ver detalles</a>
-            </div>
-          </div>
-        </div>
 
 
-        <div class="d-flex justify-content-between mt-4">
+          <div class="d-flex justify-content-between mt-4">
           <button class="btn btn-buscar btn-custom">Seguir buscando</button>
           <a href="/Dashboard" class="btn  btn-dark  btn-custom" > Volver</a>
         </div>

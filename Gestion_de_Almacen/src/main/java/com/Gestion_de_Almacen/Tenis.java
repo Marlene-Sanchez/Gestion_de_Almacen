@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 public class Tenis {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     String marca;
     String modelo;
@@ -32,7 +32,7 @@ public class Tenis {
     }
 
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
