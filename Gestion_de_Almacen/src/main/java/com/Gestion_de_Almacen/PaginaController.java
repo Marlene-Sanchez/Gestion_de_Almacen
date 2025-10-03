@@ -1,10 +1,9 @@
 package com.Gestion_de_Almacen;
 
 import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.ui.Model;
 import java.time.LocalDate;
@@ -16,7 +15,7 @@ import java.util.List;
 public class PaginaController {
     private final VentaRepository ventaRepo;
     private final TenisRepository tenisRepo;
-    private Gerente gerente = new Gerente("admin", "1234");
+    private Gerente gerente = new Gerente("admin", "123");
 
     public PaginaController(VentaRepository ventaRepo, TenisRepository tenisRepo) {
         this.ventaRepo = ventaRepo;
@@ -29,17 +28,35 @@ public class PaginaController {
         }
         return "producto";
     }
-    @GetMapping("/search")
-    public String search(HttpSession session) {
-        if (session.getAttribute("usuario") == null) {
-            return "redirect:/Login";
+
+    @RequestMapping("/tenis")
+    public class TenisController {
+
+        @Autowired
+        private TenisRepository tenisRepository;
+
+        @GetMapping("/search")
+        public String buscarTenis(Model model,HttpSession session) {
+            if (session.getAttribute("usuario") == null) {
+                return "redirect:/Login";
+            }
+            model.addAttribute("tenisList", tenisRepository.findAll());
+            return "search";
         }
-        return "search";
+
+        @GetMapping("/detalle/{id}")
+        public String detalleTenis(@PathVariable Long id, Model model) {
+            Tenis tenis = tenisRepository.findById(Math.toIntExact(id))
+                    .orElseThrow(() -> new RuntimeException("No se encontró el tenis"));
+            model.addAttribute("tenis", tenis);
+            return "Tenis";
+        }
     }
     @GetMapping("/Login")
     public String mostrarLogin() {
         return "Login";
     }
+
     @GetMapping("/venta")
     public String venta(HttpSession session) {
         if (session.getAttribute("usuario") == null) {
@@ -86,8 +103,4 @@ public class PaginaController {
             return "redirect:/Login";
         }
     }
-
-
-
-
 }
