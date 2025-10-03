@@ -1,20 +1,22 @@
 package com.Gestion_de_Almacen;
 import jakarta.persistence.*;
 @Entity
-@Table(name = "Tenis")
+@Table(name = "tenis")
 public class Tenis {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-    String marca;
-    String modelo;
-    int talla;
-    String color;
-    double precio;
-    int stock;
+    private String marca;
+    private String modelo;
+    private int talla;
+    private String color;
+    private double precio;
+    private int stock;
+
 
     public Tenis() {}
+
     public Tenis(String marca, String modelo, int talla, String color, double precio, int stock) {
         this.marca = marca;
         this.modelo = modelo;
@@ -23,16 +25,18 @@ public class Tenis {
         this.precio = precio;
         this.stock = stock;
     }
-    public void actualizarStock(int talla) {
-        this.talla = talla;
-    }
-
-    public String mostrarInfo(){
-        return (this.marca+" "+modelo+" Talla: "+talla+"\n");
+    public void actualizarStock(int cantidad) {
+        this.stock = cantidad;
     }
 
 
-    public Integer getId() {
+    public String mostrarInfo() {
+        return String.format("%s %s | Talla: %d | Color: %s | Precio: %.2f | Stock: %d",
+                marca, modelo, talla, color, precio, stock);
+    }
+
+
+    public Long getId() {
         return id;
     }
 

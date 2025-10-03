@@ -31,6 +31,7 @@ public class TenisController {
 
         return "search";
     }
+
     @GetMapping("/detalle/{id}")
     public String detalleTenis(@PathVariable Integer id, Model model) {
         Tenis tenis = tenisRepository.findById(id)
@@ -57,7 +58,7 @@ public class TenisController {
     @GetMapping("/lista")
     public String listarTenis(Model model) {
         model.addAttribute("tenisList", tenisRepository.findAll());
-        return "lista-tenis";
+        return "lista_tenis";
     }
 
 }

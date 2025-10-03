@@ -25,7 +25,7 @@ public class ReporteVentas {
         int v=0, i=0;
         for(Venta x :ventas){
             v++;
-            i+= (int) x.getTenis().precio;
+            i+= (double) x.getTenis().getPrecio();
         }
         return "Total de Ventas: "+v +"Total de Ingresos: "+ i;
     }
