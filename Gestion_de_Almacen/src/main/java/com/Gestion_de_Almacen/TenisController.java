@@ -42,7 +42,7 @@ public class TenisController {
 
 
     @GetMapping("/producto")
-    public String producto(Model model, HttpSession session) {
+        public String producto(Model model, HttpSession session) {
         if (session.getAttribute("usuario") == null) {
             return "redirect:/Login";
         }
