@@ -25,7 +25,6 @@ public class TenisController {
         if ((marca == null || marca.isEmpty()) && (modelo == null || modelo.isEmpty())) {
             model.addAttribute("tenisList", tenisRepository.findAll());
         } else {
-            // Aquí puedes implementar búsqueda personalizada
             model.addAttribute("tenisList", tenisRepository.findAll());
         }
 
