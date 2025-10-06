@@ -9,6 +9,10 @@
     body {
       background-color: #fdfdfd;
       font-family: 'Inter', sans-serif;
+      padding: 2rem;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
       
     }
     .text-center {
@@ -26,7 +30,7 @@
     }
     .title {
     font-weight: 700;
-    font-size: 22px;
+    font-size: 26px;
   }
 
   .title span {
@@ -59,12 +63,12 @@
   
   </style>
 </head>
-<body class="d-flex align-items-center justify-content-center vh-100">
+<body class="align-items-center justify-content-center vh-100">
 
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-8 search-box">
-        <h4 class="title">Buscar tenis en inventario</h4>
+          <h1 class="title">Buscar tenis en <span>Inventario</span></h1>
       <form class="row g-2 align-items-center" method="get" action="/tenis/search">
           <div class="col-md- 5">
               <label for="marca" class="form-label">Marca:</label>
