@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de Ventas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #fdfdfd;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .report-box {
+            background: #FCF3E7;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0px 4px 8px rgba(188, 0, 0, 0.1);
+            font-weight: bold;
+        }
+
+        .title {
+            font-weight: 700;
+            font-size: 22px;
+            color: #1f1f1f;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        /* tabla de arriba */
+        .table-small th {
+            background-color: #FA8C8C;
+            color: white;
+            font-weight: 700;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+        }
+
+        .table-small td {
+            background-color: white;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+            color: #333;
+            font-weight: 400;
+        }
+
+        /* tabla grande */
+        .table-large th {
+            background-color: #F4A852;
+            color: white;
+            font-weight: 700;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+        }
+
+        .table-large td {
+            background-color: white;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+            color: #333;
+            font-weight: 400;
+        }
+
+        table {
+            border-radius: 10px;
+            overflow: hidden;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        hr {
+            border: 1px solid #e0e0e0;
+            margin: 2rem 0;
+            opacity: 0.7;
+        }
+
+        .btn-orange {
+            background-color: #F4A852;
+            border: none;
+            color: white;
+            border-radius: 30px;
+            padding: 10px 30px;
+            font-weight: bold;
+        }
+
+        .btn-orange:hover {
+            filter: brightness(0.95);
+        }
+    </style>
+</head>
+
+<body class="d-flex align-items-center justify-content-center vh-100">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10 report-box">
+
+            <!-- Título -->
+            <h4 class="title">REPORTE DE VENTAS</h4>
+
+            <!-- Tabla pequeña -->
+            <div class="table-responsive mb-4">
+                <table class="table table-small align-middle">
+                    <thead>
+                    <tr>
+                        <th>Fecha de inicio</th>
+                        <th>Fecha de fin</th>
+                        <th>Pares vendidos</th>
+                        <th>Total de ingresos</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>01/09/2025</td>
+                        <td>07/09/2025</td>
+                        <td>124</td>
+                        <td>$6,820</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <hr>
+
+            <!-- Tabla grande -->
+            <div class="table-responsive">
+                <table class="table table-large align-middle">
+                    <thead>
+                    <tr>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Talla</th>
+                        <th>Precio</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Nike</td>
+                        <td>Air Max 270</td>
+                        <td>42</td>
+                        <td>$120</td>
+                    </tr>
+                    <tr>
+                        <td>Adidas</td>
+                        <td>Ultraboost 23</td>
+                        <td>41</td>
+                        <td>$150</td>
+                    </tr>
+                    <tr>
+                        <td>Puma</td>
+                        <td>RS-X</td>
+                        <td>40</td>
+                        <td>$110</td>
+                    </tr>
+                    <tr>
+                        <td>Reebok</td>
+                        <td>Classic Leather</td>
+                        <td>39</td>
+                        <td>$90</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="text-center mt-4">
+                <button class="btn btn-orange">Generar nuevo</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
