@@ -9,7 +9,7 @@ import java.sql.Date;
 public class Venta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idVenta;
+    private Integer idVenta;
 
     private Date fecha;
 
@@ -26,7 +26,7 @@ public class Venta {
         this.tenis= x;
 
     }
-    public Long getId() { return idVenta; }
+    public Integer getId() { return idVenta; }
     public Date getFecha() {
         return fecha;
     }

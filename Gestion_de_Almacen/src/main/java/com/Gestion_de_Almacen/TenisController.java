@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/tenis")
 public class TenisController {
-
+    @Autowired
+    private MarcaRepository marcaRepository;
     @Autowired
     private TenisRepository tenisRepository;
 
@@ -40,12 +41,13 @@ public class TenisController {
     }
 
 
-    @GetMapping("/producto")
+    @GetMapping("/nuevo")
         public String producto(Model model, HttpSession session) {
         if (session.getAttribute("usuario") == null) {
             return "redirect:/Login";
         }
         model.addAttribute("tenis", new Tenis());
+        model.addAttribute("marcas", marcaRepository.findAll());
         return "producto";
     }
 

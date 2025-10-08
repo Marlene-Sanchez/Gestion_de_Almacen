@@ -5,19 +5,19 @@ import jakarta.persistence.*;
 public class Tenis {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String marca;
+    private Integer id;
     private String modelo;
     private int talla;
     private String color;
     private double precio;
     private int stock;
-
+    @ManyToOne
+    @JoinColumn(name = "id_marca", nullable = false)
+    private Marca marca;
 
     public Tenis() {}
 
-    public Tenis(String marca, String modelo, int talla, String color, double precio, int stock) {
+    public Tenis(Marca marca, String modelo, int talla, String color, double precio, int stock) {
         this.marca = marca;
         this.modelo = modelo;
         this.talla = talla;
@@ -36,16 +36,8 @@ public class Tenis {
     }
 
 
-    public Long getId() {
+    public Integer getId() {
         return id;
-    }
-
-    public String getMarca() {
-        return marca;
-    }
-
-    public void setMarca(String marca) {
-        this.marca = marca;
     }
 
     public String getModelo() {
