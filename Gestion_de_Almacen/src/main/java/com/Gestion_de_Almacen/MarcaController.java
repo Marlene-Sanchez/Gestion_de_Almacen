@@ -16,9 +16,9 @@ public class MarcaController {
     private MarcaRepository marcaRepository;
 
     @GetMapping("/nueva")
-    public String nuevaMarcaForm(Model model) {
+    public String nuevaMarca(Model model) {
         model.addAttribute("marca", new Marca());
-        return "crear_marca";
+        return "Marca";
     }
 
     @PostMapping("/guardar")

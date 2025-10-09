@@ -29,7 +29,7 @@ public class TenisController {
             model.addAttribute("tenisList", tenisRepository.findAll());
         }
 
-        return "search";
+        return "Search";
     }
 
     @GetMapping("/detalle/{id}")
