@@ -7,7 +7,7 @@ public class Tenis {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String modelo;
-    private int talla;
+    private float talla;
     private String color;
     private double precio;
     private int stock;
@@ -17,7 +17,7 @@ public class Tenis {
 
     public Tenis() {}
 
-    public Tenis(Marca marca, String modelo, int talla, String color, double precio, int stock) {
+    public Tenis(Marca marca, String modelo, float talla, String color, double precio, int stock) {
         this.marca = marca;
         this.modelo = modelo;
         this.talla = talla;
@@ -48,11 +48,11 @@ public class Tenis {
         this.modelo = modelo;
     }
 
-    public int getTalla() {
+    public float getTalla() {
         return talla;
     }
 
-    public void setTalla(int talla) {
+    public void setTalla(float talla) {
         this.talla = talla;
     }
 
@@ -78,5 +78,17 @@ public class Tenis {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public void setMarca(Marca marca) {
+        this.marca = marca;
+    }
+
+    public Marca getMarca() {
+        return marca;
+    }
+
+    public Tenis(Marca marca) {
+        this.marca = marca;
     }
 }

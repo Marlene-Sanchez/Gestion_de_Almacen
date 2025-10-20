@@ -47,12 +47,17 @@ public class TenisController {
             return "redirect:/Login";
         }
         model.addAttribute("tenis", new Tenis());
+
         model.addAttribute("marcas", marcaRepository.findAll());
         return "producto";
     }
 
     @PostMapping("/guardar")
     public String guardarTenis(@ModelAttribute Tenis tenis) {
+        Marca marca = marcaRepository.findById(tenis.getMarca().getIdMarca())
+                .orElseThrow(() -> new IllegalArgumentException("Marca no encontrada"));
+
+        tenis.setMarca(marca);
         tenisRepository.save(tenis);
         return "redirect:/tenis/lista";
     }

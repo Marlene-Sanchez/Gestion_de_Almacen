@@ -16,19 +16,29 @@ public class Marca {
     @OneToMany(mappedBy = "marca", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Tenis> tenis;
 
-    public String getMarca() {
-        return nombre;
+    public Marca() {
+
     }
 
-    public void setMarca(String nombre) {
+    public Marca(String nombre, List<Tenis> tenis) {
         this.nombre = nombre;
+        this.tenis = tenis;
     }
+
     public Integer getIdMarca() {
         return idMarca;
     }
 
     public void setIdMarca(Integer idMarca) {
         this.idMarca = idMarca;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public List<Tenis> getTenis() {
@@ -38,4 +48,5 @@ public class Marca {
     public void setTenis(List<Tenis> tenis) {
         this.tenis = tenis;
     }
+
 }
