@@ -91,4 +91,7 @@ public class Tenis {
     public Tenis(Marca marca) {
         this.marca = marca;
     }
+    public String nombreMarca(){
+        return this.marca.getNombre();
+    }
 }
