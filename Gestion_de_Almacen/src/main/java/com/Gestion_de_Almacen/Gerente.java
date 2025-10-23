@@ -2,7 +2,7 @@ package com.Gestion_de_Almacen;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "gerentes")
+@Table(name = "Gerente")
 public class Gerente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

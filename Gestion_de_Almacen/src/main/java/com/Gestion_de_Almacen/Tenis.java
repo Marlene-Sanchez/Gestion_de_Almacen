@@ -45,7 +45,7 @@ public class Tenis {
     }
 
     public void setModelo(String modelo) {
-        this.modelo = modelo;
+        this.modelo = (modelo != null) ? modelo.toUpperCase() : null;
     }
 
     public float getTalla() {
