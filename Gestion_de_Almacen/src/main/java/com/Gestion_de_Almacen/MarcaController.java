@@ -24,6 +24,6 @@ public class MarcaController {
     @PostMapping("/guardar")
     public String guardarMarca(@ModelAttribute Marca marca) {
         marcaRepository.save(marca);
-        return "redirect:/marca/nueva";
+        return "redirect:/Dashboard";
     }
 }

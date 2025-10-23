@@ -86,7 +86,7 @@
           <div class="results mt-4">
               <div th:if="${tenisList != null}" th:each="tenis : ${tenisList}" class="card mb-2">
                   <div class="card-body">
-                      <h5 class="card-title" th:text="${tenis.marca + ' ' + tenis.modelo}">Marca Modelo</h5>
+                      <h5 class="card-title" th:text="${tenis.nombreMarca + ' ' + tenis.modelo}">Marca Modelo</h5>
                       <p class="card-text">
                           Talla: <span th:text="${tenis.talla}">0</span> -
                           Color: <span th:text="${tenis.color}">---</span> -
