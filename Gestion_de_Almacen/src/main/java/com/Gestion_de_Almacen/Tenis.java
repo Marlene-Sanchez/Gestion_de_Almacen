@@ -85,7 +85,7 @@ public class Tenis {
     }
 
     public Marca getMarca() {
-        return marca;
+        return marca ;
     }
 
     public Tenis(Marca marca) {
