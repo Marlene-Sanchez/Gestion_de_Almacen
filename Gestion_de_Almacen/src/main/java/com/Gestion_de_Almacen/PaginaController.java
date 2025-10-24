@@ -27,13 +27,7 @@ public class PaginaController {
         return "Login";
     }
 
-    @GetMapping("/venta")
-    public String venta(HttpSession session) {
-        if (session.getAttribute("usuario") == null) {
-            return "redirect:/Login";
-        }
-        return "venta";
-    }
+
     @GetMapping("/Dashboard")
     public String mostrarDashboard(Model model, HttpSession session) {
         if (session.getAttribute("usuario") == null) {

@@ -21,32 +21,35 @@
         <div class="col-md-8 search-box">
             <h4 class="title">Agregar <span>Venta</span></h4>
 
-            <form class="row g-2">
-                <div class="col-md-6">
-                    <label for="cliente" class="form-label">Cliente:</label>
-                    <input type="text" class="form-control" id="cliente" placeholder="Nombre del cliente">
-                </div>
+            <form class="row g-2" method="post" action="/venta/guardar" th:object="${venta}">
+
                 <div class="col-md-6">
                     <label for="fecha" class="form-label">Fecha:</label>
-                    <input type="date" class="form-control" id="fecha">
+                    <input type="date" class="form-control" id="fecha" th:field="*{fecha}">
                 </div>
+
                 <div class="col-md-6">
-                    <label for="producto" class="form-label">Producto:</label>
-                    <input type="text" class="form-control" id="producto" placeholder="Marca y modelo del tenis">
+                    <label for="tenis" class="form-label">Producto:</label>
+                    <select class="form-select" id="tenis" th:field="*{tenis}" required>
+                        <option value="">Selecciona un tenis</option>
+                        <option th:each="t : ${tenisList}"
+                                th:value="${t.id}"
+                                th:text="${t.marca.nombre + ' ' + t.modelo + ' (Talla ' + t.talla + ')'}">
+                        </option>
+                    </select>
                 </div>
-                <div class="col-md-3">
-                    <label for="cantidad" class="form-label">Cantidad:</label>
-                    <input type="number" class="form-control" id="cantidad" min="1" value="1">
-                </div>
+
                 <div class="col-md-3">
                     <label for="total" class="form-label">Total:</label>
                     <input type="number" class="form-control" id="total" placeholder="Precio total">
                 </div>
+
                 <div class="d-flex justify-content-between mt-4 ">
                     <button type="submit" class="btn btn-dark btn-custom">Registrar Venta</button>
-                    <a href="/Dashboard" class="btn  btn-dark  btn-custom" > Volver</a>
+                    <a href="/Dashboard" class="btn btn-dark btn-custom">Volver</a>
                 </div>
             </form>
+
         </div>
     </div>
 </div>
