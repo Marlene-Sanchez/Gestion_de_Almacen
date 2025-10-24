@@ -32,14 +32,23 @@ public class VentaController {
 
 
     @PostMapping("/guardar")
-    public String guardarVenta(@ModelAttribute Venta venta) {
+    public String guardarVenta(@ModelAttribute Venta venta, Model model) {
+        Tenis tenisSeleccionado = venta.getTenis();
 
-        Tenis tenis = tenisRepository.findById(venta.getTenis().getId())
-                .orElseThrow(() -> new IllegalArgumentException("Tenis no válido"));
+        Tenis tenisBD = tenisRepository.findById(tenisSeleccionado.getId())
+                .orElseThrow(() -> new RuntimeException("El tenis no existe"));
+        if (tenisBD.getStock() <= 0) {
+            model.addAttribute("errorStock", "No hay stock disponible para este tenis");
+            model.addAttribute("venta", new Venta());
+            model.addAttribute("tenisList", tenisRepository.findAll());
+            return "venta";
+        }
 
-        venta.setTenis(tenis);
+        tenisBD.setStock(tenisBD.getStock() - 1);
+        tenisRepository.save(tenisBD);
 
         ventaRepository.save(venta);
+
         return "redirect:/Dashboard";
     }
 
