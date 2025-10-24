@@ -15,17 +15,18 @@ public class VentaController {
 
     @Autowired
     private VentaRepository ventaRepository;
+    @Autowired
     private TenisRepository tenisRepository;
 
     @GetMapping("/nueva")
-    public String nuevaMarca(Model model, HttpSession session) {
+    public String nuevaVenta(Model model, HttpSession session) {
 
         if (session.getAttribute("usuario") == null) {
             return "redirect:/Login";
         }
 
         model.addAttribute("venta", new Venta());
-        model.addAttribute("tenisList", tenisRepository.findAll());
+        model.addAttribute("tenisList", tenisRepository.findAll() );
         return "venta";
     }
 
