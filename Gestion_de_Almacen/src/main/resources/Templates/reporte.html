@@ -90,7 +90,6 @@
             filter: brightness(0.95);
         }
 
-        /* Asegura que los bordes se mantengan */
         .table-large td, .table-large th {
             border: 1px solid #e0e0e0 !important;
         }
@@ -104,7 +103,6 @@
 
             <h2 class="title">Reporte de <span>Ventas</span></h2>
 
-            <!-- Tabla de resumen -->
             <div class="table-responsive mb-4">
                 <table class="table table-small align-middle">
                     <thead>
@@ -128,7 +126,6 @@
 
             <hr>
 
-            <!-- Tabla de detalle -->
             <div class="table-responsive">
                 <table class="table table-large align-middle">
                     <thead>
@@ -140,14 +137,14 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <!-- Si no hay productos, muestra fila vacía con bordes -->
+                    <!-- si no hay productos, muestra fila vacía con bordes -->
                     <tr th:if="${productos.isEmpty()}">
                         <td colspan="4" class="text-center text-muted" style="height: 50px;">
-                            No hay productos en el reporte.
+                            No hay productos en el reporte
                         </td>
                     </tr>
 
-                    <!-- Si hay productos, se listan aquí -->
+                    <!-- si hay productos, se enlistan aquí -->
                     <tr th:each="tenis : ${productos}">
                         <td th:text="${tenis.nombreMarca()}">Nike</td>
                         <td th:text="${tenis.modelo}">Air Max</td>
@@ -158,14 +155,14 @@
                 </table>
             </div>
 
-            <!-- Botón para generar nuevo -->
+            <!-- botón para generar nuevo reporte -->
             <div class="text-center mt-4">
                 <form action="/reporte/nuevo" method="get">
                     <button type="submit" class="btn btn-orange">Generar nuevo</button>
                 </form>
             </div>
 
-            <!-- Botón para volver -->
+            <!-- botón para volver -->
             <div class="text-center mt-4">
                 <a href="/Dashboard" class="btn btn-orange btn-custom">Volver</a>
             </div>
