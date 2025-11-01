@@ -1,7 +1,12 @@
 package com.Gestion_de_Almacen;
 import jakarta.persistence.*;
 @Entity
-@Table(name = "tenis")
+@Table
+        (name = "tenis",
+        uniqueConstraints = @UniqueConstraint(
+                columnNames = {"id_marca", "modelo", "talla", "color"}
+        )
+    )
 public class Tenis {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,6 +43,10 @@ public class Tenis {
 
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getModelo() {

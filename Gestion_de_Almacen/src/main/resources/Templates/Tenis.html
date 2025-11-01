@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Detalle Tenis</title>
@@ -34,56 +34,49 @@
           font-weight: 700;
           font-size: 26px;
         }
-        .title span {
-          color: var(--orange);
-        }
-
+        .title span { color: var(--orange); }
         .btn-custom {
-          border-radius: 20px;
-          padding: 10px 20px;
-          font-weight: bold;
-        }
-        .btn-eliminar {
-          background-color: #f7a942;
-          color: white;
-        }
-        .btn-editar {
-          background-color: #f7a942;
-          color: white;
-        }
-        .btn-vendido {
-          background-color: #f64d4d;
-          color: white;
-        }
-        .btn-dark {
-          background-color: #333;
-          color: white;
-        }
+              border-radius: 20px;
+              padding: 10px 20px;
+              font-weight: bold;
+            }
+            .btn-eliminar, .btn-editar { background-color: #f7a942; color: white; }
+            .btn-vendido { background-color: #f64d4d; color: white; }
+            .btn-dark { background-color: #333; color: white; }
     </style>
 </head>
 <body>
 
-<div class="card-wrap">
-    <h2 class="text-center mb-4 title">
-        Nike Air <span>Max</span>
-    </h2>
+    <div class="card-wrap">
+        <h2 class="text-center mb-4 title">
+            <span th:text="${tenis.marca.nombre}">Marca</span> <span th:text="${tenis.modelo}">Modelo</span>
+        </h2>
 
-    <div class="mb-3">
-        <p><strong>Marca:</strong> Nike</p>
-        <p><strong>Modelo:</strong> Air Max</p>
-        <p><strong>Talla:</strong> 26</p>
-        <p><strong>Color:</strong> Negro</p>
-        <p><strong>Precio:</strong> $1800</p>
-        <p><strong>Stock:</strong> 10</p>
-    </div>
+        <div class="mb-3">
+            <p><strong>Marca:</strong> <span th:text="${tenis.marca.nombre}"></span></p>
+            <p><strong>Modelo:</strong> <span th:text="${tenis.modelo}"></span></p>
+            <p><strong>Talla:</strong> <span th:text="${tenis.talla}"></span></p>
+            <p><strong>Color:</strong> <span th:text="${tenis.color}"></span></p>
+            <p><strong>Precio:</strong> $<span th:text="${tenis.precio}"></span> MXN</p>
+            <p><strong>Stock:</strong> <span th:text="${tenis.stock}"></span></p>
+        </div>
 
-    <div class="d-flex justify-content-between flex-wrap gap-2">
-        <button class="btn btn-eliminar btn-custom">Eliminar</button>
-        <button class="btn btn-editar btn-custom">Editar</button>
-        <button class="btn btn-vendido btn-custom">¡Vendido!</button>
-        <a href="/tenis/search" class="btn btn-dark btn-custom">Volver</a>
+        <div class="d-flex justify-content-between flex-wrap gap-2">
+            <a th:href="@{'/tenis/eliminar/' + ${tenis.id}}"
+               class="btn btn-eliminar btn-custom"
+               onclick="return confirm('¿Estás segura de que deseas eliminar este tenis?');">
+                Eliminar
+            </a>
+            <a th:href="@{'/tenis/editar/' + ${tenis.id}}"
+               class="btn btn-editar btn-custom">
+                Editar
+            </a>
+
+            <a th:href="@{'/venta/crear/' + ${tenis.id}}" class="btn btn-vendido btn-custom">¡Vendido!</a>
+
+            <a href="/tenis/search" class="btn btn-dark btn-custom">Volver</a>
+        </div>
     </div>
-</div>
 
 </body>
 </html>

@@ -98,6 +98,7 @@
             <div class="mt-3">
                 <a href="/tenis/nuevo" class="btn btn-orange px-4">+ Agregar producto</a>
                 <a href="/marca/nueva" class="btn btn-orange px-4">+ Nueva Marca</a>
+                <a href="/tenis/lista" class="btn btn-orange px-4">Inventario</a>
             </div>
 
         </div>
@@ -106,10 +107,10 @@
             <h5 class="fw700 text-orange mb-2">Bitácora de ventas</h5>
             <div class="box p-4">
                 <div th:each="venta : ${ventas}">
-                    <p class="text-pink mb-1" th:text="${venta.fecha}">Fecha</p>
-                    <p class="mb-1" th:text="${venta.tenis.modelo}">Modelo</p>
-                    <p class="mb-1" th:text="${venta.tenis.talla}">Número</p>
-                    <p class="mb-3" th:text="${venta.tenis.precio}">Precio</p>
+                    <p class="text-pink mb-1">Fecha: <span th:text="${venta.fecha}"></span></p>
+                    <p class="mb-1">Modelo: <span th:text="${venta.tenis.modelo}"></span></p>
+                    <p class="mb-1">Número: <span th:text="${venta.tenis.talla}"></span></p>
+                    <p class="mb-3">Precio: $ <span th:text="${venta.tenis.precio}"></span></p>
                     <hr class="my-3">
                 </div>
 

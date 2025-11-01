@@ -137,14 +137,12 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <!-- si no hay productos, muestra fila vacía con bordes -->
                     <tr th:if="${productos.isEmpty()}">
                         <td colspan="4" class="text-center text-muted" style="height: 50px;">
                             No hay productos en el reporte
                         </td>
                     </tr>
 
-                    <!-- si hay productos, se enlistan aquí -->
                     <tr th:each="tenis : ${productos}">
                         <td th:text="${tenis.nombreMarca()}">Nike</td>
                         <td th:text="${tenis.modelo}">Air Max</td>
@@ -155,14 +153,12 @@
                 </table>
             </div>
 
-            <!-- botón para generar nuevo reporte -->
             <div class="text-center mt-4">
                 <form action="/reporte/nuevo" method="get">
                     <button type="submit" class="btn btn-orange">Generar nuevo</button>
                 </form>
             </div>
 
-            <!-- botón para volver -->
             <div class="text-center mt-4">
                 <a href="/Dashboard" class="btn btn-orange btn-custom">Volver</a>
             </div>

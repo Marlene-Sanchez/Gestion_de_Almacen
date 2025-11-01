@@ -23,7 +23,10 @@ public class MarcaController {
 
     @PostMapping("/guardar")
     public String guardarMarca(@ModelAttribute Marca marca) {
-        marcaRepository.save(marca);
+        if (marca.getNombre() != null && !marca.getNombre().isBlank()) {
+            marca.setNombre(marca.getNombre().trim().toUpperCase());
+            marcaRepository.save(marca);
+        }
         return "redirect:/Dashboard";
     }
 }

@@ -3,10 +3,7 @@ package com.Gestion_de_Almacen;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 
 @Controller
@@ -51,6 +48,28 @@ public class VentaController {
 
         return "redirect:/Dashboard";
     }
+    @GetMapping("/crear/{idTenis}")
+    public String crearVentaDirecta(@PathVariable Integer idTenis) {
+
+        Tenis tenis = tenisRepository.findById(idTenis)
+                .orElseThrow(() -> new RuntimeException("No se encontró el tenis con id: " + idTenis));
+
+        if (tenis.getStock() <= 0) {
+            throw new RuntimeException("No hay stock disponible para este tenis.");
+        }
+
+        tenis.setStock(tenis.getStock() - 1);
+        tenisRepository.save(tenis);
+
+        Venta nuevaVenta = new Venta();
+        nuevaVenta.setTenis(tenis);
+        nuevaVenta.setFecha(java.sql.Date.valueOf(java.time.LocalDate.now()));
+
+        ventaRepository.save(nuevaVenta);
+
+        return "redirect:/Dashboard";
+    }
+
 
 
 }
