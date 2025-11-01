@@ -23,6 +23,9 @@
           font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
           color:var(--text);
           background:var(--white);
+           display: flex;
+          align-items: center;
+          justify-content: center;
         }
         .fw200{font-weight:200;}
         .fw700{font-weight:700;}
@@ -53,11 +56,17 @@
           font-weight:200;
           border:none;
           border-radius:16px;
+
         }
         .btn-orange:hover{
           filter:brightness(.95);
           color:#fff;
         }
+        .btn-custom {
+              border-radius: 20px;
+              padding: 10px 20px;
+            }
+        .btn-dark { background-color: #333; color: white; }
     </style>
 </head>
 <body>
@@ -68,8 +77,14 @@
         Pelayos Sport <span class="text-orange">Dashboard</span>
     </h2>
     <p class="fw700 fs-5">
-        Bienvenido, José! hoy es
+        Bienvenido, José ! hoy es
         <span class="text-pink" th:text="${fechaHoy}">04 de Septiembre de 2025</span>
+
+            <div class="d-flex justify-content-between flex-wrap gap-2">
+                <a href="/cambiarContraseña" class="btn btn-dark btn-custom ">Cambiar Contraseña</a>
+            </div>
+
+
     </p>
 
     <div class="row g-4 mt-3">
