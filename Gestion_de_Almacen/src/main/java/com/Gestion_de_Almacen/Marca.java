@@ -1,15 +1,16 @@
 package com.Gestion_de_Almacen;
 
 import jakarta.persistence.*;
-
 import java.util.List;
 
 @Entity
-@Table(name ="Marca")
+@Table(name = "Marca")
 public class Marca {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idMarca;
+
     @Column(nullable = false, unique = true)
     private String nombre;
 
@@ -17,7 +18,10 @@ public class Marca {
     private List<Tenis> tenis;
 
     public Marca() {
+    }
 
+    public Marca(String nombre) {
+        this.nombre = nombre;
     }
 
     public Marca(String nombre, List<Tenis> tenis) {
@@ -25,6 +29,7 @@ public class Marca {
         this.tenis = tenis;
     }
 
+    // Getters y Setters
     public Integer getIdMarca() {
         return idMarca;
     }
@@ -48,5 +53,4 @@ public class Marca {
     public void setTenis(List<Tenis> tenis) {
         this.tenis = tenis;
     }
-
 }
