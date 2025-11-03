@@ -12,7 +12,7 @@
         }
 
         body {
-          background-color: #fdfdfd;
+          background-color: var(--white);;
           font-family: 'Inter', sans-serif;
           display: flex;
           justify-content: center;
@@ -45,10 +45,13 @@
           background-color: #f7a942;
           color: white;
         }
+        .btn-orange{
+          background:var(--pink);
+          color:#fff;
+          font-weight:200;
+          border:none;
+          border-radius:16px;
 
-        .btn-dark {
-          background-color: #f64d4d;
-          border-color: transparent;
         }
     </style>
 </head>
@@ -70,7 +73,7 @@
             <label class="form-label">Nueva contraseña</label>
             <input type="password" name="nueva" class="form-control" required>
         </div>
-        <button type="submit" class="btn-custom btn-dark btn-warning w-100">Actualizar</button>
+        <button type="submit" class="btn-custom btn-orange btn-warning w-100">Actualizar</button>
     </form>
 
     <div th:if="${mensaje}" class="alert alert-info mt-3" th:text="${mensaje}"></div>

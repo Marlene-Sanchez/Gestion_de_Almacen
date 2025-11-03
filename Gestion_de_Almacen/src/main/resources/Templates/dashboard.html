@@ -65,8 +65,7 @@
         .btn-custom {
               border-radius: 20px;
               padding: 10px 20px;
-            }
-        .btn-dark { background-color: #333; color: white; }
+              }
     </style>
 </head>
 <body>
@@ -76,16 +75,14 @@
     <h2 class="fw700 mb-3">
         Pelayos Sport <span class="text-orange">Dashboard</span>
     </h2>
-    <p class="fw700 fs-5">
-        Bienvenido, José ! hoy es
-        <span class="text-pink" th:text="${fechaHoy}">04 de Septiembre de 2025</span>
+    <div class="d-flex align-items-center">
+        <p class="fw700 fs-5 mb-0 me-4">
+            Bienvenido, José! hoy es
+            <span class="text-pink" th:text="${fechaHoy}">04 de Septiembre de 2025</span>
+        </p>
+        <a href="/cambiarContrasena" class="btn btn-orange btn-custom">Cambiar Contraseña</a>
+    </div>
 
-            <div class="d-flex justify-content-between flex-wrap gap-2">
-                <a href="/cambiarContraseña" class="btn btn-dark btn-custom ">Cambiar Contraseña</a>
-            </div>
-
-
-    </p>
 
     <div class="row g-4 mt-3">
         <div class="col-md-6">
