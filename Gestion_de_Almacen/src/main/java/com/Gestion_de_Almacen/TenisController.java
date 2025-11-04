@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/tenis")
 public class TenisController {
@@ -24,12 +26,24 @@ public class TenisController {
         if (session.getAttribute("usuario") == null) {
             return "redirect:/Login";
         }
+        List<Tenis> resultados;
 
-        if ((marca == null || marca.isEmpty()) && (modelo == null || modelo.isEmpty())) {
-            model.addAttribute("tenisList", tenisRepository.findAll());
+        boolean tieneMarca = marca != null && !marca.trim().isEmpty();
+        boolean tieneModelo = modelo != null && !modelo.trim().isEmpty();
+
+        if (tieneMarca && tieneModelo) {
+            resultados = tenisRepository.findByMarcaAndModelo(marca.trim(), modelo.trim());
+        } else if (tieneMarca) {
+            resultados = tenisRepository.findByMarca(marca.trim());
+        } else if (tieneModelo) {
+            resultados = tenisRepository.findByModelo(modelo.trim());
         } else {
-            model.addAttribute("tenisList", tenisRepository.findAll());
+            resultados = tenisRepository.findAll();
         }
+
+        model.addAttribute("tenisList", resultados);
+        model.addAttribute("marca", marca);
+        model.addAttribute("modelo", modelo);
 
         return "Search";
     }
@@ -61,6 +75,7 @@ public class TenisController {
 
         tenis.setMarca(marca);
         tenis.setModelo(tenis.getModelo().toUpperCase());
+
         boolean existe = tenisRepository.existsByMarcaAndModeloAndTallaAndColor(
                 marca, tenis.getModelo(), tenis.getTalla(), tenis.getColor()
         );

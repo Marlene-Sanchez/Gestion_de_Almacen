@@ -29,7 +29,6 @@ public class GestionDeAlmacenApplication {
                 System.out.println("✅ Usuario admin creado con contraseña '123'");
             }
             if (marcaRepo.count() == 0 && tenisRepo.count() == 0) {
-                // 🔸 Crear marcas
                 Marca nike = new Marca("NIKE");
                 Marca adidas = new Marca("ADIDAS");
                 Marca puma = new Marca("PUMA");
@@ -40,10 +39,7 @@ public class GestionDeAlmacenApplication {
 
                 marcaRepo.saveAll(List.of(nike, adidas, puma, dc, jordan, vans, converse));
 
-                //creando lista dinamica de tenis
                 List<Tenis> tenisList = new ArrayList<>();
-
-                // ciclos para no repetir y repetir
 
                 //ADIDAS CAMPUS
                 float[] tallasCampusGris = {23.5F, 24, 24.5F, 25, 25.5F, 26};

@@ -80,17 +80,17 @@
             Bienvenido, José! hoy es
             <span class="text-pink" th:text="${fechaHoy}">04 de Septiembre de 2025</span>
         </p>
-        <a href="/cambiarContrasena" class="btn btn-orange btn-custom">Cambiar Contraseña</a>
+        <a href="/cambiarContrasena" class="btn btn-orange px-4     btn-custom">Cambiar Contraseña</a>
     </div>
 
 
     <div class="row g-4 mt-3">
         <div class="col-md-6">
-            <h5 class="fw700 text-orange mb-2">Resumen del día</h5>
+                <h5 class="fw700 text-orange mb-2">Resumen del día</h5>
             <div class="box p-4">
                 <div class="row mb-2">
                     <div class="col">Pares en bodega</div>
-                    <div class="col text-end">500</div>
+                    <div class="col text-end" th:text="${paresEnBodega}">500</div>
                 </div>
 
                 <div class="row mb-2">
@@ -100,11 +100,12 @@
 
                 <div class="row mb-2">
                     <div class="col">Modelo más vendido hoy</div>
-                    <div class="col text-end">Nike Air blanco</div>
+                    <div class="col text-end" th:text="${modeloMasVendido}">Nike Air blanco</div>
                 </div>
+
                 <div class="row">
                     <div class="col">Ingresos de hoy</div>
-                    <div class="col text-end" th:text="${ingresosHoy}">0</div>
+                    <div class="col text-end">$<span th:text="${ingresosHoy}">0</span> MXN</div>
                 </div>
             </div>
             <div class="mt-3">

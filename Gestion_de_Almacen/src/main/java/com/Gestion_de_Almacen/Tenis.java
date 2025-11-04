@@ -6,7 +6,7 @@ import jakarta.persistence.*;
         uniqueConstraints = @UniqueConstraint(
                 columnNames = {"id_marca", "modelo", "talla", "color"}
         )
-    )
+        )
 public class Tenis {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -68,9 +68,8 @@ public class Tenis {
     public String getColor() {
         return color;
     }
-
     public void setColor(String color) {
-        this.color = color;
+        this.color = color != null ? color.toUpperCase() : null;
     }
 
     public double getPrecio() {

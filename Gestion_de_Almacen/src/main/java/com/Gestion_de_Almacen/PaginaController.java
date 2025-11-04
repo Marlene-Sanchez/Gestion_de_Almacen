@@ -10,6 +10,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 public class PaginaController {
@@ -53,11 +55,31 @@ public class PaginaController {
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd 'de' MMMM 'de' yyyy");
         model.addAttribute("fechaHoy", hoy.format(formato));
 
-        List<Venta> ventas = ventaRepo.findAll();
+        int paresEnBodega = tenisRepo.findAll().stream()
+                .mapToInt(Tenis::getStock)
+                .sum();
 
-        model.addAttribute("paresVendidosHoy", ventas.size());
-        model.addAttribute("ingresosHoy", ventas.stream().mapToDouble(v -> v.getTenis().getPrecio()).sum());
-        model.addAttribute("ventas", ventas);
+        List<Venta> ventasHoy = ventaRepo.findAll().stream()
+                .filter(v -> v.getFecha() != null && v.getFecha().toLocalDate().equals(hoy))
+                .toList();
+
+        int paresVendidosHoy = ventasHoy.size();
+        double ingresosHoy = ventasHoy.stream()
+                .mapToDouble(v -> v.getTenis().getPrecio())
+                .sum();
+
+        String modeloMasVendido = ventasHoy.stream()
+                .collect(Collectors.groupingBy(v -> v.getTenis().getModelo(), Collectors.counting()))
+                .entrySet().stream()
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey)
+                .orElse("N/A");
+
+        model.addAttribute("paresEnBodega", paresEnBodega);
+        model.addAttribute("paresVendidosHoy", paresVendidosHoy);
+        model.addAttribute("ingresosHoy", ingresosHoy);
+        model.addAttribute("modeloMasVendido", modeloMasVendido);
+        model.addAttribute("ventas", ventasHoy);
 
         return "dashboard";
     }
