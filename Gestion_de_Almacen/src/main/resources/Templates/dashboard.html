@@ -66,6 +66,18 @@
               border-radius: 20px;
               padding: 10px 20px;
               }
+        .btn-outline-danger {
+          border-radius: 16px;
+          color: #FA8C8C;
+          border: 1px solid #FA8C8C;
+          font-weight: 700;
+          background-color: transparent;
+        }
+        .btn-outline-danger:hover {
+          background-color: #FA8C8C;
+          color: #fff;
+        }
+
     </style>
 </head>
 <body>
@@ -81,6 +93,8 @@
             <span class="text-pink" th:text="${fechaHoy}">04 de Septiembre de 2025</span>
         </p>
         <a href="/cambiarContrasena" class="btn btn-orange px-4     btn-custom">Cambiar Contraseña</a>
+        <a href="/logout" class="btn btn-outline-danger px-4 ms-2 btn-custom">Cerrar sesión</a>
+
     </div>
 
 

@@ -20,4 +20,18 @@ public interface TenisRepository extends JpaRepository<Tenis, Integer> {
             "AND UPPER(t.modelo) LIKE CONCAT('%', UPPER(:modelo), '%')")
     List<Tenis> findByMarcaAndModelo(@Param("marca") String marca, @Param("modelo") String modelo);
 
+    @Query("SELECT t FROM Tenis t WHERE t.talla = :talla")
+    List<Tenis> findByTalla(@Param("talla") float talla);
+
+    @Query("SELECT t FROM Tenis t WHERE " +
+            "(:marca IS NULL OR UPPER(t.marca.nombre) LIKE CONCAT('%', UPPER(:marca), '%')) AND " +
+            "(:modelo IS NULL OR UPPER(t.modelo) LIKE CONCAT('%', UPPER(:modelo), '%')) AND " +
+            "(:talla IS NULL OR t.talla = :talla)")
+    List<Tenis> buscarPorFiltros(@Param("marca") String marca,
+                                 @Param("modelo") String modelo,
+                                 @Param("talla") Float talla);
+
+    @Query("SELECT DISTINCT t.modelo FROM Tenis t ORDER BY t.modelo ASC")
+    List<String> findDistinctModelos();
+
 }

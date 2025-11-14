@@ -23,6 +23,49 @@
         .btn-dark { background-color: #f7a942; border: none; }
         .btn-custom { border-radius: 20px; padding: 10px 20px; font-weight: bold; }
         .btn-agregar { background-color: #f64d4d; color: white; }
+        choices__inner {
+          background-color: #fff !important;
+          border-radius: 0.5rem !important;
+          border: 1px solid #ced4da !important;
+          min-height: 38px !important;
+          padding: 6px 12px !important;
+          font-size: 1rem !important;
+          font-weight: 400;
+          color: #212529 !important;
+          box-shadow: none !important;
+        }
+
+        .choices__list--multiple .choices__item {
+          background-color: #fca4a4 !important;
+          border: none !important;
+          color: white !important;
+          border-radius: 12px !important;
+          padding: 5px 10px !important;
+          margin-right: 5px;
+          font-weight: 500;
+        }
+
+        .choices__list--multiple .choices__item.is-highlighted {
+          background-color: #f64d4d !important;
+        }
+        .choices__input {
+          margin: 0 !important;
+          padding: 3px 0 !important;
+        }
+
+        .choices {
+          margin-bottom: 0 !important;
+        }
+
+        .choices[data-type*="select-multiple"] .choices__inner {
+          cursor: text;
+        }
+
+        .choices__inner, .form-control, .form-select {
+          height: 38px;
+          display: flex;
+          align-items: center;
+        }
     </style>
 </head>
 <body class="d-flex align-items-center justify-content-center vh-100">
@@ -51,8 +94,21 @@
 
                 <div class="col-md-6">
                     <label for="modelo" class="form-label">Modelo:</label>
-                    <input type="text" class="form-control" th:field="*{modelo} " id="modelo" name="modelo" placeholder="Modelo del tenis" style="text-transform: uppercase;">
+
+                    <input type="text"
+                           class="form-control"
+                           id="modelo"
+                           name="modelo"
+                           th:value="${tenis.modelo}"
+                           placeholder="Modelo del tenis"
+                           style="text-transform: uppercase;"
+                           list="listaModelos">
+
+                    <datalist id="listaModelos">
+                        <option th:each="m : ${modelos}" th:value="${m}"></option>
+                    </datalist>
                 </div>
+
 
                 <div class="col-md-6">
                     <label for="talla" class="form-label">Talla:</label>
@@ -60,9 +116,11 @@
                 </div>
 
                 <div class="col-md-5">
+                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+                    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+
                     <label for="color" class="form-label">Color:</label>
-                    <select id="color" name="color" class="form-select" required>
-                        <option value="">Selecciona un color</option>
+                    <select id="color" name="coloresSeleccionados" class="form-select " multiple>
                         <option value="NEGRO">NEGRO</option>
                         <option value="BLANCO">BLANCO</option>
                         <option value="ROJO">ROJO</option>
@@ -72,7 +130,9 @@
                         <option value="ROSA">ROSA</option>
                         <option value="AMARILLO">AMARILLO</option>
                     </select>
-                </div>
+                    <script>
+                        const colorSelect = new Choices('#color');
+                    </script>
 
                 <div class="col-md-6">
                     <label for="precio" class="form-label">Precio:</label>

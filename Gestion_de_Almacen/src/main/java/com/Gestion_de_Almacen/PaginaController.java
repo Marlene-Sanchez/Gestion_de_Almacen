@@ -112,4 +112,10 @@ public class PaginaController {
         return "gerente";
     }
 
+    @GetMapping("/logout")
+    public String cerrarSesion(HttpSession session) {
+        session.invalidate();
+        return "redirect:/Login";
+    }
+
 }

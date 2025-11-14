@@ -21,32 +21,27 @@ public class TenisController {
     @GetMapping("/search")
     public String buscarTenis(@RequestParam(required = false) String marca,
                               @RequestParam(required = false) String modelo,
+                              @RequestParam(required = false) Float talla,
                               Model model,
                               HttpSession session) {
         if (session.getAttribute("usuario") == null) {
             return "redirect:/Login";
         }
-        List<Tenis> resultados;
 
-        boolean tieneMarca = marca != null && !marca.trim().isEmpty();
-        boolean tieneModelo = modelo != null && !modelo.trim().isEmpty();
-
-        if (tieneMarca && tieneModelo) {
-            resultados = tenisRepository.findByMarcaAndModelo(marca.trim(), modelo.trim());
-        } else if (tieneMarca) {
-            resultados = tenisRepository.findByMarca(marca.trim());
-        } else if (tieneModelo) {
-            resultados = tenisRepository.findByModelo(modelo.trim());
-        } else {
-            resultados = tenisRepository.findAll();
-        }
+        List<Tenis> resultados = tenisRepository.buscarPorFiltros(
+                (marca == null || marca.trim().isEmpty()) ? null : marca.trim(),
+                (modelo == null || modelo.trim().isEmpty()) ? null : modelo.trim(),
+                talla
+        );
 
         model.addAttribute("tenisList", resultados);
         model.addAttribute("marca", marca);
         model.addAttribute("modelo", modelo);
+        model.addAttribute("talla", talla);
 
         return "Search";
     }
+
 
     @GetMapping("/detalle/{id}")
     public String detalleTenis(@PathVariable Integer id, Model model) {
@@ -63,13 +58,15 @@ public class TenisController {
             return "redirect:/Login";
         }
         model.addAttribute("tenis", new Tenis());
-
         model.addAttribute("marcas", marcaRepository.findAll());
+        model.addAttribute("modelos", tenisRepository.findDistinctModelos());
         return "producto";
     }
 
+
     @PostMapping("/guardar")
-    public String guardarTenis(@ModelAttribute Tenis tenis, RedirectAttributes redirectAttributes) {
+    public String guardarTenis(@ModelAttribute Tenis tenis,
+                               @RequestParam(value = "coloresSeleccionados", required = false) List<String> coloresSeleccionados, RedirectAttributes redirectAttributes) {
         Marca marca = marcaRepository.findById(tenis.getMarca().getIdMarca())
                 .orElseThrow(() -> new IllegalArgumentException("Marca no encontrada"));
 
@@ -79,6 +76,9 @@ public class TenisController {
         boolean existe = tenisRepository.existsByMarcaAndModeloAndTallaAndColor(
                 marca, tenis.getModelo(), tenis.getTalla(), tenis.getColor()
         );
+        if (coloresSeleccionados != null && !coloresSeleccionados.isEmpty()) {
+            tenis.setColor(String.join("/", coloresSeleccionados));
+        }
 
         if (existe) {
             redirectAttributes.addFlashAttribute("error",
@@ -105,14 +105,17 @@ public class TenisController {
 
         model.addAttribute("tenis", tenis);
         model.addAttribute("marcas", marcaRepository.findAll());
+        model.addAttribute("modelos", tenisRepository.findDistinctModelos());
         return "producto_editar";
     }
 
     @PostMapping("/actualizar")
-    public String actualizarTenis(@ModelAttribute Tenis tenisActualizado) {
+    public String actualizarTenis(@ModelAttribute Tenis tenisActualizado, @RequestParam(value = "coloresSeleccionados", required = false) List<String> coloresSeleccionados, RedirectAttributes redirectAttributes) {
         Tenis tenis = tenisRepository.findById(tenisActualizado.getId())
                 .orElseThrow(() -> new RuntimeException("No se encontró el tenis"));
-
+        if (coloresSeleccionados != null && !coloresSeleccionados.isEmpty()) {
+            tenis.setColor(String.join("/", coloresSeleccionados));
+        }
         tenis.setModelo(tenisActualizado.getModelo().toUpperCase());
         tenis.setColor(tenisActualizado.getColor().toUpperCase());
         tenis.setTalla(tenisActualizado.getTalla());
@@ -121,6 +124,7 @@ public class TenisController {
         tenis.setMarca(tenisActualizado.getMarca());
 
         tenisRepository.save(tenis);
+        redirectAttributes.addFlashAttribute("mensaje", "Tenis actualizado correctamente");
         return "redirect:/tenis/detalle/" + tenis.getId();
     }
 
