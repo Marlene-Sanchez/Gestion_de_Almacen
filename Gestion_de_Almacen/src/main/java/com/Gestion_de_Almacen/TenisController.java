@@ -113,18 +113,21 @@ public class TenisController {
     public String actualizarTenis(@ModelAttribute Tenis tenisActualizado, @RequestParam(value = "coloresSeleccionados", required = false) List<String> coloresSeleccionados, RedirectAttributes redirectAttributes) {
         Tenis tenis = tenisRepository.findById(tenisActualizado.getId())
                 .orElseThrow(() -> new RuntimeException("No se encontró el tenis"));
+
         if (coloresSeleccionados != null && !coloresSeleccionados.isEmpty()) {
-            tenis.setColor(String.join("/", coloresSeleccionados));
+            tenis.setColor(String.join("/", coloresSeleccionados).toUpperCase());
+        } else {
+            tenis.setColor(tenisActualizado.getColor().toUpperCase());
         }
+
         tenis.setModelo(tenisActualizado.getModelo().toUpperCase());
-        tenis.setColor(tenisActualizado.getColor().toUpperCase());
         tenis.setTalla(tenisActualizado.getTalla());
         tenis.setPrecio(tenisActualizado.getPrecio());
         tenis.setStock(tenisActualizado.getStock());
         tenis.setMarca(tenisActualizado.getMarca());
 
         tenisRepository.save(tenis);
-        redirectAttributes.addFlashAttribute("mensaje", "Tenis actualizado correctamente");
+        redirectAttributes.addFlashAttribute("success", "Tenis actualizado correctamente");
         return "redirect:/tenis/detalle/" + tenis.getId();
     }
 
@@ -132,7 +135,7 @@ public class TenisController {
     public String eliminarTenis(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
         try {
             tenisRepository.deleteById(id);
-            redirectAttributes.addFlashAttribute("mensaje", "El tenis se eliminó correctamente.");
+            redirectAttributes.addFlashAttribute("success", "El tenis se eliminó correctamente.");
         } catch (DataIntegrityViolationException e) {
             redirectAttributes.addFlashAttribute("error",
                     "No se puede eliminar este tenis porque está asociado a una o más ventas.");

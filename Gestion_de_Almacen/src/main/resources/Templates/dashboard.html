@@ -87,6 +87,9 @@
     <h2 class="fw700 mb-3">
         Pelayos Sport <span class="text-orange">Dashboard</span>
     </h2>
+    <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+    <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
     <div class="d-flex align-items-center">
         <p class="fw700 fs-5 mb-0 me-4">
             Bienvenido, José! hoy es

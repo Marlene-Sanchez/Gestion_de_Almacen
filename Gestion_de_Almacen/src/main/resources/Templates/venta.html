@@ -20,7 +20,7 @@
     <div class="row justify-content-center" method="post" action="/marca/guardar">
         <div class="col-md-8 search-box">
             <h4 class="title">Agregar <span>Venta</span></h4>
-            <div th:if="${errorStock}" class="alert alert-danger mt-2" th:text="${errorStock}"></div>
+            <div th:if="${error}" class="alert alert-danger mt-3" th:text="${error}"></div>
             <form class="row g-2" method="post" action="/venta/guardar" th:object="${venta}">
 
                 <div class="col-md-6">
@@ -44,22 +44,6 @@
                         $ <span id="precioTenis"></span> MXN
                     </p>
                 </div>
-
-                <!-- <script>
-                    function actualizarPrecio() {
-                        const select = document.getElementById("tenis");
-                        const precio = select.options[select.selectedIndex].getAttribute("data-precio");
-                        const container = document.getElementById("precioContainer");
-                        const span = document.getElementById("precioTenis");
-
-                        if (precio) {
-                            span.textContent = precio;
-                            container.style.display = "block";
-                        } else {
-                            container.style.display = "none";
-                        }
-                    }
-                </script> -->
 
                 <div class="d-flex justify-content-between mt-4 ">
                     <button type="submit" class="btn btn-dark btn-custom">Registrar Venta</button>
