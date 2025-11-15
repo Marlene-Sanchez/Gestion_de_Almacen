@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Búsqueda de Tenis</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #fdfdfd;
+      font-family: 'Inter', sans-serif;
+      padding: 2rem;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      
+    }
+    .text-center {
+      text-align: center;
+      font-weight: 700;
+        font-size: 22px;
+    }
+    .search-box {
+      background: #FCF3E7;
+      border-radius: 20px;
+      padding: 2rem;
+      font-weight: bold;
+      box-shadow: 0px 4px 8px rgba(188, 0, 0, 0.1);
+      
+    }
+    .title {
+    font-weight: 700;
+    font-size: 26px;
+  }
+
+  .title span {
+    color: #F4A852;
+  }
+    .btn-dark {
+      background-color: #f7a942;
+      border: none;
+    }
+    .btn-custom {
+      border-radius: 20px;
+      padding: 10px 20px;
+      font-weight: bold;
+    }
+    .col{
+        padding: 10px 10px;
+    }
+    .btn-buscar {
+      background-color: #f7a942;
+      color: white;
+    }
+    .results {
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px dashed #ccc;
+      border-radius: 15px;
+      min-height: 100px;
+      text-align: center;
+      color: #999;
+      font-style: italic;
+    }
+  
+  </style>
+</head>
+<body class="align-items-center justify-content-center vh-100">
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8 search-box">
+          <h1 class="title text-center">Buscar tenis en <span>Inventario</span></h1>
+          <div th:if="${success}" class="alert alert-success " role="alert">
+              <span th:text="${success}"></span>
+          </div>
+          <div th:if="${info}" class="alert alert-info" role="alert">
+              <span th:text="${info}"></span>
+          </div>
+
+          <div th:if="${warning}" class="alert alert-warning" role="alert">
+              <span th:text="${warning}"></span>
+          </div>
+          <div th:if="${error}" class="alert alert-danger" role="alert">
+              <span th:text="${error}"></span>
+          </div>
+      <form class="row g-2 align-items-center" method="get" action="/tenis/search">
+          <div class="d-flex justify-content-between mt-4">
+              <div class="col">
+              <label for="marca" class="form-label">Marca:</label>
+              <input type="text" class="form-control" id="marca" name="marca"
+                     th:value="${marca}" placeholder="Marca del tenis">
+                </div>
+              <div class="col">
+              <label for="modelo" class="form-label">Modelo:</label>
+              <input type="text" class="form-control" id="modelo" name="modelo"
+                     th:value="${modelo}" placeholder="Modelo del tenis">
+              </div>
+              <div class="col">
+              <label for="talla" class="form-label">Talla:</label>
+              <input type="text" class="form-control" id="talla" name="talla"
+                     th:value="${talla}" placeholder="Talla del tenis">
+              </div>
+          </div>
+          <div class="d-flex justify-content-between mt-4">
+              <button type="submit" class="btn btn-dark btn-custom">
+                  Buscar
+              </button>
+              <a href="/Dashboard" class="btn  btn-dark  btn-custom" > Volver al Dashboard</a>
+
+          </div>
+
+          <div class="col-md-2 d-flex align-items-end">
+
+          </div>
+      </form>
+          <div class="results mt-4">
+              <div th:if="${tenisList != null}" th:each="tenis : ${tenisList}" class="card mb-2">
+                  <div class="card-body">
+                      <h5 class="card-title" th:text="${tenis.nombreMarca + ' ' + tenis.modelo}">Marca Modelo</h5>
+                      <p class="card-text">
+                          Talla: <span th:text="${tenis.talla}">0</span> -
+                          Color: <span th:text="${tenis.color}">---</span> -
+                          $<span th:text="${tenis.precio}">0.00</span>
+                      </p>
+                      <a th:href="@{/tenis/detalle/{id}(id=${tenis.id})}" class="btn btn-dark btn-sm">Ver detalles</a>
+                  </div>
+              </div>
+          </div>
+
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Reporte de Ventas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #fdfdfd;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .report-box {
+            background: #FCF3E7;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0px 4px 8px rgba(188, 0, 0, 0.1);
+            font-weight: bold;
+        }
+
+        .title {
+            font-weight: 700;
+            font-size: 26px;
+            color: #1f1f1f;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .title span {
+            color: #FA8C8C;
+        }
+
+        .table-small th {
+            background-color: #FA8C8C;
+            color: white;
+            font-weight: 700;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+        }
+
+        .table-small td {
+            background-color: white;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+            color: #333;
+            font-weight: 400;
+        }
+
+        .table-large th {
+            background-color: #F4A852;
+            color: white;
+            font-weight: 700;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+        }
+
+        .table-large td {
+            background-color: white;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+            color: #333;
+            font-weight: 400;
+        }
+
+        table {
+            border-radius: 10px;
+            overflow: hidden;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        hr {
+            border: 1px solid #e0e0e0;
+            margin: 2rem 0;
+            opacity: 0.7;
+        }
+
+        .btn-orange {
+            background-color: #F4A852;
+            border: none;
+            color: white;
+            border-radius: 30px;
+            padding: 10px 30px;
+            font-weight: bold;
+        }
+
+        .btn-orange:hover {
+            filter: brightness(0.95);
+        }
+    </style>
+</head>
+
+<body class="d-flex align-items-center justify-content-center vh-100">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10 report-box">
+
+            <h2 class="title">Reporte de <span>Ventas</span></h2>
+
+            <!-- FORMULARIO EN LA TABLA -->
+            <form action="/reporte" method="get">
+                <div class="table-responsive mb-4">
+                    <table class="table table-small align-middle">
+                        <thead>
+                        <tr>
+                            <th>Fecha de inicio</th>
+                            <th>Fecha de fin</th>
+                            <th>Pares vendidos</th>
+                            <th>Total de ingresos</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <input type="date" class="form-control" name="inicio" required
+                                       th:value="${fechaInicio}">
+                            </td>
+                            <td>
+                                <input type="date" class="form-control" name="fin" required
+                                       th:value="${fechaFin}">
+                            </td>
+                            <td th:text="${paresVendidos} ?: '-'">-</td>
+                            <td th:text="'$' + ${totalIngresos} ?: '-'">-</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-orange">Generar Reporte</button>
+                </div>
+            </form>
+
+            <hr>
+
+            <div class="table-responsive">
+                <table class="table table-large align-middle">
+                    <thead>
+                    <tr>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Talla</th>
+                        <th>Precio</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${productos.isEmpty()}">
+                        <td colspan="4" class="text-center text-muted">No hay productos en el reporte</td>
+                    </tr>
+                    <tr th:each="tenis : ${productos}">
+                        <td th:text="${tenis.marca.nombre}">Marca</td>
+                        <td th:text="${tenis.modelo}">Modelo</td>
+                        <td th:text="${tenis.talla}">Talla</td>
+                        <td th:text="'$' + ${tenis.precio}">Precio</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="text-center mt-4">
+                <a href="/Dashboard" class="btn btn-orange btn-custom">Volver</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
