@@ -97,7 +97,6 @@
 
             <h2 class="title">Reporte de <span>Ventas</span></h2>
 
-            <!-- FORMULARIO EN LA TABLA -->
             <form action="/reporte" method="get">
                 <div class="table-responsive mb-4">
                     <table class="table table-small align-middle">
@@ -139,18 +138,22 @@
                         <th>Marca</th>
                         <th>Modelo</th>
                         <th>Talla</th>
-                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Precio Unitario</th>
+                        <th>Total</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:if="${productos.isEmpty()}">
-                        <td colspan="4" class="text-center text-muted">No hay productos en el reporte</td>
+                    <tr th:if="${ventasAgrupadas.isEmpty()}">
+                        <td colspan="6" class="text-center text-muted">No hay productos en el reporte</td>
                     </tr>
-                    <tr th:each="tenis : ${productos}">
-                        <td th:text="${tenis.marca.nombre}">Marca</td>
-                        <td th:text="${tenis.modelo}">Modelo</td>
-                        <td th:text="${tenis.talla}">Talla</td>
-                        <td th:text="'$' + ${tenis.precio}">Precio</td>
+                    <tr th:each="agrupada : ${ventasAgrupadas}">
+                        <td th:text="${agrupada.tenis.marca.nombre}">Marca</td>
+                        <td th:text="${agrupada.tenis.modelo}">Modelo</td>
+                        <td th:text="${agrupada.tenis.talla}">Talla</td>
+                        <td th:text="${agrupada.cantidad}">Cantidad</td>
+                        <td th:text="'$' + ${agrupada.tenis.precio}">Precio</td>
+                        <td th:text="'$' + ${agrupada.total}">Total</td>
                     </tr>
                     </tbody>
                 </table>
@@ -164,3 +167,4 @@
 </div>
 </body>
 </html>
+

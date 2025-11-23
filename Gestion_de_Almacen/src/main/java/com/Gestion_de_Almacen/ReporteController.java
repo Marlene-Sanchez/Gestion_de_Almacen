@@ -7,7 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class ReporteController {
@@ -29,13 +30,24 @@ public class ReporteController {
                     .mapToDouble(v -> v.getTenis().getPrecio())
                     .sum();
 
+            // Agrupar ventas por Tenis (modelo, talla, marca, precio)
+            Map<String, VentaAgrupada> agrupadas = new HashMap<>();
+
+            for (Venta v : ventas) {
+                Tenis t = v.getTenis();
+                String clave = t.getMarca().getNombre() + "_" + t.getModelo() + "_" + t.getTalla() + "_" + t.getPrecio();
+
+                agrupadas.computeIfAbsent(clave, k -> new VentaAgrupada(t, 0));
+                agrupadas.get(clave).incrementarCantidad();
+            }
+
             model.addAttribute("fechaInicio", inicio);
             model.addAttribute("fechaFin", fin);
             model.addAttribute("paresVendidos", paresVendidos);
             model.addAttribute("totalIngresos", totalIngresos);
-            model.addAttribute("productos", ventas.stream().map(Venta::getTenis).toList());
+            model.addAttribute("ventasAgrupadas", agrupadas.values());
         } else {
-            model.addAttribute("productos", List.of()); // vacía la lista si aún no hay fechas
+            model.addAttribute("ventasAgrupadas", List.of());
         }
 
         return "reporte";
